@@ -1,0 +1,19 @@
+﻿<Application x:Class="LTS.UI.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:LTS.UI"
+             xmlns:converters="clr-namespace:LTS.UI.Converters">
+
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles/CommonStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+            <converters:InverseBoolConverter      x:Key="InverseBoolConverter"/>
+
+        </ResourceDictionary>
+    </Application.Resources>
+
+</Application>

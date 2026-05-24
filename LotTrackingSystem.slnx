@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".gitignore" />
+  </Folder>
+  <Project Path="LTS.Application/LTS.Application.csproj" />
+  <Project Path="LTS.Common/LTS.Common.csproj" />
+  <Project Path="LTS.Tests/LTS.Tests.csproj" />
+  <Project Path="LTS.UI/LTS.UI.csproj" />
+</Solution>

@@ -1,0 +1,118 @@
+﻿<Window x:Class="LTS.UI.Views.RoutePickerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LTS.UI.Views"
+        mc:Ignorable="d"
+        Title="RoutePickerWindow" Height="450" Width="380">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Title -->
+        <TextBlock Grid.Row="0"
+                   Text="Select locations for this lot"
+                   FontSize="15" FontWeight="SemiBold"
+                   Margin="0,0,0,4"/>
+
+        <!-- Location checkboxes -->
+        <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto">
+            <ItemsControl ItemsSource="{Binding LocationItems}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Margin="0,3" Padding="10,8"
+                                BorderBrush="#DDDDDD" BorderThickness="1"
+                                CornerRadius="4">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <CheckBox Grid.Column="0"
+                                          IsChecked="{Binding IsSelected}"
+                                          VerticalAlignment="Center"
+                                          Margin="0,0,10,0"/>
+
+                                <TextBlock Grid.Column="1"
+                                           Text="{Binding LocationName}"
+                                           FontSize="13"
+                                           VerticalAlignment="Center"/>
+
+                                <!-- Status badge -->
+                                <Border Grid.Column="2"
+                                        Margin="8,0"
+                                        Padding="6,2"
+                                        CornerRadius="8">
+                                    <Border.Style>
+                                        <Style TargetType="Border">
+                                            <Setter Property="Background" Value="#E6F4EA"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Status}" Value="Occupied">
+                                                    <Setter Property="Background" Value="#FFF3E0"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding Status}" Value="Disabled">
+                                                    <Setter Property="Background" Value="#EEEEEE"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Border.Style>
+                                    <TextBlock Text="{Binding Status}"
+                                               FontSize="10"/>
+                                </Border>
+
+
+                                <Button Grid.Column="3"
+                                        Content="▲"
+                                        Width="26" Height="26"
+                                        Margin="2,0"
+                                        FontSize="10"
+                                        Command="{Binding DataContext.MoveUpCommand,
+                                                  RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                        CommandParameter="{Binding}"/>
+
+                                <Button Grid.Column="4"
+                                        Content="▼"
+                                        Width="26" Height="26"
+                                        Margin="2,0"
+                                        FontSize="10"
+                                        Command="{Binding DataContext.MoveDownCommand,
+                                                  RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                        CommandParameter="{Binding}"/>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+        <!-- Selected count -->
+        <TextBlock Grid.Row="3"
+                   Text="{Binding SelectedCountText}"
+                   FontSize="11" Foreground="#555"
+                   Margin="0,10,0,10"/>
+
+        <!-- Buttons -->
+        <StackPanel Grid.Row="4" Orientation="Horizontal"
+                    HorizontalAlignment="Right">
+            <Button Content="Cancel"
+                    Width="80" Height="34"
+                    Margin="0,0,8,0"
+                    Click="CancelButton_Click"/>
+            <Button Content="Confirm Route"
+                    Width="110" Height="34"
+                    Background="#185FA5" Foreground="White"
+                    BorderThickness="0"
+                    Click="ConfirmButton_Click"/>
+        </StackPanel>
+
+    </Grid>
+</Window>
